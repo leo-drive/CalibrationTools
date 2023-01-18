@@ -2,7 +2,7 @@
 <launch>
   <arg name="vehicle_id" default="default"/>
 
-  <let name="sensor_model" value="goal_sensor_kit"/>
+  <let name="sensor_model" value="golf_sensor_kit"/>
 
   <group>
     <push-ros-namespace namespace="sensor_kit"/>

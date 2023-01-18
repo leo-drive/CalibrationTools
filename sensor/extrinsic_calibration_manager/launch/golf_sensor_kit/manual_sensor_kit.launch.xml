@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-  <arg name="vehicle_id" default="default"/>
+  <arg name="vehicle_id" default="golf"/>
 
   <let name="sensor_model" value="golf_sensor_kit"/>
   <let name="parent_frame" value="sensor_kit_base_link"/>
