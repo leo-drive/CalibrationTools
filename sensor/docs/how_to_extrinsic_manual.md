@@ -98,7 +98,7 @@ For example,
 
 ```sh
 ros2 launch extrinsic_calibration_manager calibration.launch.xml \
-  mode:=manual sensor_model:=aip_xx1 vehicle_model:=jpntaxi
+  mode:=manual sensor_model:=golf_sensor_kit vehicle_model:=golf_vehicle
 ```
 
 Play your rosbag (on terminal 2).
