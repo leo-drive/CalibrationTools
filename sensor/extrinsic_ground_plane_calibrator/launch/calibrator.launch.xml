@@ -14,9 +14,9 @@
       <param name="child_frame" value="$(var child_frame)"/>
       <param name="marker_size" value="10.0"/>
       <param name="max_inlier_distance" value="0.01"/>
-      <param name="min_plane_points" value="500"/>
-      <param name="min_plane_points_percentage" value="20.0"/>
-      <param name="max_cos_distance" value="0.2"/>
+      <param name="min_plane_points" value="200"/>
+      <param name="min_plane_points_percentage" value="5.0"/>
+      <param name="max_cos_distance" value="0.4"/>
       <param name="max_iterations" value="500"/>
       <param name="verbose" value="true"/>
       <param name="broadcast_calibration_tf" value="true"/>
