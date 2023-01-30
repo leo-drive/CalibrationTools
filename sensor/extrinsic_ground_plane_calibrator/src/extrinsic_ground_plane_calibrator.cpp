@@ -262,6 +262,8 @@ bool ExtrinsicGroundPlaneCalibrator::extractGroundPlane(
   while (iteration_size > min_plane_points_) {
     seg.setInputCloud(iteration_cloud);
     seg.segment(*inliers, *coefficients);
+    //    RCLCPP_INFO(
+    //      this->get_logger(), "[GOLF DEBUG]:: INLIERS_INDICES_SIZE = %ld", inliers->indices.size());
 
     if (inliers->indices.size() == 0) {
       if (verbose_) {
@@ -301,6 +303,8 @@ bool ExtrinsicGroundPlaneCalibrator::extractGroundPlane(
       extract.setIndices(inliers);
       extract.setNegative(false);
       extract.filter(*inliers_pointcloud);
+      RCLCPP_INFO(
+        this->get_logger(), "[GOLF DEBUG]:: EXTRACT GROUND PLANE = TRUE");
       return true;
     }
 
@@ -315,6 +319,8 @@ bool ExtrinsicGroundPlaneCalibrator::extractGroundPlane(
     iteration_cloud->swap(next_cloud);
     iteration_size = iteration_cloud->height * iteration_cloud->width;
   }
+  //  RCLCPP_INFO(
+  //    this->get_logger(), "[GOLF DEBUG]:: EXTRACT GROUND PLANE = FALSE");
 
   return false;
 }
