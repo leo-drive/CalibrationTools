@@ -23,6 +23,7 @@
     [VLS128_TOP_base_link]"/>
 <!--    <param name="child_frames" value="
     [VLS128_TOP_base_link,
+    VLP16_F_base_link,
     VLP16_BL_base_link,
     VLP16_BR_base_link,
     VLP16_ML_base_link,
@@ -42,33 +43,43 @@
 
 <!--  <group>-->
 <!--    <include file="$(find-pkg-share extrinsic_ground_plane_calibrator)/launch/calibrator.launch.xml">-->
-<!--      <arg name="ns" value="$(var parent_frame)/VLP16_BL_base_link"/>-->
+<!--      <arg name="ns" value="$(var parent_frame)/VLP16_F_base_link"/>-->
 <!--      <arg name="base_frame" value="$(var base_frame)"/>-->
 <!--      <arg name="parent_frame" value="$(var parent_frame)"/>-->
-<!--      <arg name="child_frame" value="VLP16_BL_base_link"/>-->
-<!--      <arg name="pointcloud_topic" value="/sensing/lidar/bl/pointcloud_raw"/>-->
+<!--      <arg name="child_frame" value="VLP16_F_base_link"/>-->
+<!--      <arg name="pointcloud_topic" value="/sensing/lidar/f/pointcloud_raw"/>-->
 <!--    </include>-->
 <!--  </group>-->
 
 <!--  <group>
     <include file="$(find-pkg-share extrinsic_ground_plane_calibrator)/launch/calibrator.launch.xml">
-      <arg name="ns" value="$(var parent_frame)/VLP16_BR_base_link"/>
+      <arg name="ns" value="$(var parent_frame)/VLP16_BL_base_link"/>
       <arg name="base_frame" value="$(var base_frame)"/>
       <arg name="parent_frame" value="$(var parent_frame)"/>
-      <arg name="child_frame" value="VLP16_BR_base_link"/>
-      <arg name="pointcloud_topic" value="/sensing/lidar/br/pointcloud_raw"/>
+      <arg name="child_frame" value="VLP16_BL_base_link"/>
+      <arg name="pointcloud_topic" value="/sensing/lidar/bl/pointcloud_raw"/>
     </include>
   </group>-->
 
-<!--  <group>
-    <include file="$(find-pkg-share extrinsic_ground_plane_calibrator)/launch/calibrator.launch.xml">
-      <arg name="ns" value="$(var parent_frame)/VLP16_ML_base_link"/>
-      <arg name="base_frame" value="$(var base_frame)"/>
-      <arg name="parent_frame" value="$(var parent_frame)"/>
-      <arg name="child_frame" value="VLP16_ML_base_link"/>
-      <arg name="pointcloud_topic" value="/sensing/lidar/ml/pointcloud_raw"/>
-    </include>
-  </group>-->
+<!--  <group>-->
+<!--    <include file="$(find-pkg-share extrinsic_ground_plane_calibrator)/launch/calibrator.launch.xml">-->
+<!--      <arg name="ns" value="$(var parent_frame)/VLP16_BR_base_link"/>-->
+<!--      <arg name="base_frame" value="$(var base_frame)"/>-->
+<!--      <arg name="parent_frame" value="$(var parent_frame)"/>-->
+<!--      <arg name="child_frame" value="VLP16_BR_base_link"/>-->
+<!--      <arg name="pointcloud_topic" value="/sensing/lidar/br/pointcloud_raw"/>-->
+<!--    </include>-->
+<!--  </group>-->
+
+<!--  <group>-->
+<!--    <include file="$(find-pkg-share extrinsic_ground_plane_calibrator)/launch/calibrator.launch.xml">-->
+<!--      <arg name="ns" value="$(var parent_frame)/VLP16_ML_base_link"/>-->
+<!--      <arg name="base_frame" value="$(var base_frame)"/>-->
+<!--      <arg name="parent_frame" value="$(var parent_frame)"/>-->
+<!--      <arg name="child_frame" value="VLP16_ML_base_link"/>-->
+<!--      <arg name="pointcloud_topic" value="/sensing/lidar/ml/pointcloud_raw"/>-->
+<!--    </include>-->
+<!--  </group>-->
 
 <!--  <group>
     <include file="$(find-pkg-share extrinsic_ground_plane_calibrator)/launch/calibrator.launch.xml">
