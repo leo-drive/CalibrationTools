@@ -28,7 +28,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: TOP
+    SyncSource: ""
 Visualization Manager:
   Class: ""
   Displays:
@@ -242,12 +242,12 @@ Visualization Manager:
       Reference Frame: VLS128_TOP
       Value: true
     - Class: rviz_default_plugins/Axes
-      Enabled: true
+      Enabled: false
       Length: 1
       Name: velodyne_mr
       Radius: 0.10000000149011612
       Reference Frame: VLP16_MR
-      Value: true
+      Value: false
     - Class: rviz_default_plugins/Axes
       Enabled: false
       Length: 1.5
@@ -466,9 +466,9 @@ Visualization Manager:
       Near Clip Distance: 0.009999999776482582
       Pitch: 0
       Position:
-        X: -12.175963401794434
-        Y: 0.3367598056793213
-        Z: 0
+        X: -21.308835983276367
+        Y: 0.8963629603385925
+        Z: 7.450580596923828e-07
       Target Frame: <Fixed Frame>
       Value: FPS (rviz_default_plugins)
       Yaw: 6.221988201141357
@@ -489,5 +489,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1916
-  X: 1920
-  Y: 39
+  X: 811
+  Y: 1119
