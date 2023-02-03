@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-  <arg name="vehicle_id" default="golf"/>
+  <arg name="vehicle_id" default="isuzu"/>
 
-  <let name="sensor_model" value="golf_sensor_kit"/>
+  <let name="sensor_model" value="isuzu_sensor"/>
 
   <group>
     <push-ros-namespace namespace="sensor_kit"/>

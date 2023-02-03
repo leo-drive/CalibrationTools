@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-  <arg name="vehicle_id" default="golf"/>
+  <arg name="vehicle_id" default="isuzu"/>
 
-  <let name="sensor_model" value="golf_sensor_kit"/>
+  <let name="sensor_model" value="isuzu_sensor"/>
   <let name="parent_frame" value="sensor_kit_base_link"/>
 
   <!-- extrinsic_calibration_client -->
@@ -17,49 +17,36 @@
   <!-- extrinsic_calibration_manager -->
   <node pkg="extrinsic_calibration_manager" exec="extrinsic_calibration_manager" name="extrinsic_calibration_manager" output="screen">
     <param name="parent_frame" value="$(var parent_frame)"/>
-    <param name="child_frames" value="
-    [VLS128_TOP_base_link,
-    VLP16_BL_base_link,
-    VLP16_BR_base_link,
-    VLP16_ML_base_link,
-    VLP16_MR_base_link,
-    VLP16_F_base_link]"/>
+    <param name="child_frames" value="[camera_left/camera_link,
+    velodyne_front,
+    velodyne_left,
+    velodyne_right]"
+    />
   </node>
 
   <!-- extrinsic_manual_calibrator -->
+
   <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
-    <arg name="ns" value="$(var parent_frame)/VLS128_TOP_base_link"/>
+    <arg name="ns" value="$(var parent_frame)/camera_left/camera_link"/>
     <arg name="parent_frame" value="$(var parent_frame)"/>
-    <arg name="child_frame" value="VLS128_TOP_base_link"/>
+    <arg name="child_frame" value="camera_left/camera_link"/>
   </include>
 
   <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
-    <arg name="ns" value="$(var parent_frame)/VLP16_BL_base_link"/>
+    <arg name="ns" value="$(var parent_frame)/velodyne_front"/>
     <arg name="parent_frame" value="$(var parent_frame)"/>
-    <arg name="child_frame" value="VLP16_BL_base_link"/>
+    <arg name="child_frame" value="velodyne_front"/>
   </include>
 
   <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
-    <arg name="ns" value="$(var parent_frame)/VLP16_BR_base_link"/>
+    <arg name="ns" value="$(var parent_frame)/velodyne_left"/>
     <arg name="parent_frame" value="$(var parent_frame)"/>
-    <arg name="child_frame" value="VLP16_BR_base_link"/>
+    <arg name="child_frame" value="velodyne_left"/>
   </include>
 
   <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
-    <arg name="ns" value="$(var parent_frame)/VLP16_ML_base_link"/>
+    <arg name="ns" value="$(var parent_frame)/velodyne_right"/>
     <arg name="parent_frame" value="$(var parent_frame)"/>
-    <arg name="child_frame" value="VLP16_ML_base_link"/>
-  </include>
-
-  <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
-    <arg name="ns" value="$(var parent_frame)/VLP16_MR_base_link"/>
-    <arg name="parent_frame" value="$(var parent_frame)"/>
-    <arg name="child_frame" value="VLP16_MR_base_link"/>
-  </include>
-
-  <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
-    <arg name="ns" value="$(var parent_frame)/VLP16_F_base_link"/>
-    <arg name="parent_frame" value="$(var parent_frame)"/>
-    <arg name="child_frame" value="VLP16_F_base_link"/>
+    <arg name="child_frame" value="velodyne_right"/>
   </include>
 </launch>
