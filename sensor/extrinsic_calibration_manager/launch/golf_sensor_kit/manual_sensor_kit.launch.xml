@@ -18,7 +18,15 @@
   <node pkg="extrinsic_calibration_manager" exec="extrinsic_calibration_manager" name="extrinsic_calibration_manager" output="screen">
     <param name="parent_frame" value="$(var parent_frame)"/>
     <param name="child_frames" value="
-    [VLS128_TOP_base_link,
+    [CAM_FR/camera_link,
+    CAM_F/camera_link,
+    CAM_FL/camera_link,
+    CAM_MR/camera_link,
+    CAM_ML/camera_link,
+    CAM_BR/camera_link,
+    CAM_BL/camera_link,
+    CAM_B/camera_link,
+    VLS128_TOP_base_link,
     VLP16_BL_base_link,
     VLP16_BR_base_link,
     VLP16_ML_base_link,
@@ -27,6 +35,56 @@
   </node>
 
   <!-- extrinsic_manual_calibrator -->
+  <!-- camera -->
+  <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
+    <arg name="ns" value="$(var parent_frame)/CAM_FR/camera_link"/>
+    <arg name="parent_frame" value="$(var parent_frame)"/>
+    <arg name="child_frame" value="CAM_FR/camera_link"/>
+  </include>
+
+  <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
+    <arg name="ns" value="$(var parent_frame)/CAM_F/camera_link"/>
+    <arg name="parent_frame" value="$(var parent_frame)"/>
+    <arg name="child_frame" value="CAM_F/camera_link"/>
+  </include>
+
+  <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
+    <arg name="ns" value="$(var parent_frame)/CAM_FL/camera_link"/>
+    <arg name="parent_frame" value="$(var parent_frame)"/>
+    <arg name="child_frame" value="CAM_FL/camera_link"/>
+  </include>
+
+  <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
+    <arg name="ns" value="$(var parent_frame)/CAM_MR/camera_link"/>
+    <arg name="parent_frame" value="$(var parent_frame)"/>
+    <arg name="child_frame" value="CAM_MR/camera_link"/>
+  </include>
+
+  <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
+    <arg name="ns" value="$(var parent_frame)/CAM_ML/camera_link"/>
+    <arg name="parent_frame" value="$(var parent_frame)"/>
+    <arg name="child_frame" value="CAM_ML/camera_link"/>
+  </include>
+
+  <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
+    <arg name="ns" value="$(var parent_frame)/CAM_BR/camera_link"/>
+    <arg name="parent_frame" value="$(var parent_frame)"/>
+    <arg name="child_frame" value="CAM_BR/camera_link"/>
+  </include>
+
+  <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
+    <arg name="ns" value="$(var parent_frame)/CAM_BL/camera_link"/>
+    <arg name="parent_frame" value="$(var parent_frame)"/>
+    <arg name="child_frame" value="CAM_BL/camera_link"/>
+  </include>
+
+  <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
+    <arg name="ns" value="$(var parent_frame)/CAM_B/camera_link"/>
+    <arg name="parent_frame" value="$(var parent_frame)"/>
+    <arg name="child_frame" value="CAM_B/camera_link"/>
+  </include>
+
+  <!-- lidar -->
   <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
     <arg name="ns" value="$(var parent_frame)/VLS128_TOP_base_link"/>
     <arg name="parent_frame" value="$(var parent_frame)"/>
