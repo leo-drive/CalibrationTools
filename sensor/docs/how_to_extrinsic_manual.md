@@ -43,7 +43,7 @@ For example,
 
 ```sh
 ros2 launch extrinsic_calibration_manager calibration.launch.xml \
-  mode:=manual sensor_model:=isuzu_sensor vehicle_model:=isuzu
+  mode:=manual sensor_model:=isuzu_sensor vehicle_model:=isuzu vehicle_id:=isuzu
 ```
 
 Play your rosbag (on terminal 2). Example for ISUZU bag:
