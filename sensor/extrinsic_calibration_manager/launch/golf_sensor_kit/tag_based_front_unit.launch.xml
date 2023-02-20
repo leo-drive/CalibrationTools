@@ -4,12 +4,10 @@
   <let name="sensor_model" value="golf_sensor_kit"/>
   <let name="parent_frame" value="sensor_kit_base_link"/>
   <arg name="camera_name"/>
-  <arg name="use_concatenated_pointcloud" default="false"/>
-
-  <let name="image_topic" value="/sensing/camera/$(var camera_name)/image_raw"/>
-  <let name="camera_info_topic" value="/sensing/camera/$(var camera_name)/camera_info"/>
+  <arg name="rviz"/>
   <let name="camera_frame" value="CAM_B/camera_link"/>
-  <let name="pointcloud_topic" value="/sensing/lidar/top/pointcloud_raw"/>
+  <let name="lidar_model" value="velodyne_vls128"/>
+  <let name="rviz_profile" value="$(find-pkg-share extrinsic_tag_based_calibrator)/rviz/tag_calib_camera0_velodyne_top.rviz"/>
 
   <let name="calibrate_sensor" value="false"/>
   <let name="calibrate_sensor" value="true" if="$(eval &quot;'$(var camera_name)' == 'camera7' &quot;)"/>
@@ -30,24 +28,46 @@
       [$(var camera_frame)]"/>
   </node>
 
+  <!-- image decompressor -->
+<!--  <group if="$(var calibrate_sensor)">-->
+<!--    <node pkg="image_transport_decompressor" exec="image_transport_decompressor_node" name="decompressor" output="screen">-->
+<!--      <remap from="decompressor/input/compressed_image" to="/sensing/camera/$(var camera_name)/image_raw/compressed"/>-->
+<!--      <remap from="decompressor/output/raw_image" to="/sensing/camera/$(var camera_name)/image_raw/decompressed"/>-->
+<!--    </node>-->
+<!--  </group>-->
+
+  <!-- tag based calibrator -->
+  <include file="$(find-pkg-share extrinsic_tag_based_calibrator)/launch/calibrator.launch.xml" if="$(var calibrate_sensor)">
+    <arg name="ns" value="$(var parent_frame)/$(var camera_frame)"/>
+    <arg name="parent_frame" value="$(var parent_frame)"/>
+    <arg name="child_frame" value="$(var camera_frame)"/>
+    <arg name="image_topic" value="/sensing/camera/$(var camera_name)/image_raw"/>
+    <arg name="camera_info_topic" value="/sensing/camera/$(var camera_name)/camera_info"/>
+    <arg name="pointcloud_topic" value="/sensing/lidar/top/pointcloud_raw"/>
+    <arg name="lidar_model" value="$(var lidar_model)"/>
+  </include>
+
   <!-- interactive calibrator -->
   <group if="$(var calibrate_sensor)">
     <push-ros-namespace namespace="$(var parent_frame)/$(var camera_frame)"/>
 
     <node pkg="extrinsic_interactive_calibrator" exec="interactive_calibrator" name="interactive_calibrator" output="screen">
-      <remap from="pointcloud" to="$(var pointcloud_topic)"/>
-      <remap from="image" to="$(var image_topic)"/>
-      <remap from="camera_info" to="$(var camera_info_topic)"/>
+      <remap from="pointcloud" to="/sensing/lidar/top/pointcloud_raw"/>
+      <remap from="image" to="/sensing/camera/$(var camera_name)/image_raw"/>
+      <remap from="camera_info" to="/sensing/camera/$(var camera_name)/camera_info"/>
+      <remap from="calibration_points_input" to="calibration_points"/>
 
       <param name="camera_parent_frame" value="$(var parent_frame)"/>
       <param name="camera_frame" value="$(var camera_frame)"/>
-      <param name="use_compressed" value="false"/>
-      <param name="timer_period" value="1.0"/>
-      <param name="delay_tolerance" value="0.06"/>
+      <param name="use_calibration_api" value="false"/>
+      <param name="can_publish_tf" value="false"/>
     </node>
+
     <include file="$(find-pkg-share intrinsic_camera_calibration)/launch/optimizer.launch.xml">
       <arg name="k_coefficients" value="0"/>
       <arg name="zero_tangent_dist" value="true"/>
     </include>
+
+    <node pkg="rviz2" exec="rviz2" name="rviz2" output="screen" args="-d $(var rviz_profile)" if="$(var rviz)"/>
   </group>
 </launch>
