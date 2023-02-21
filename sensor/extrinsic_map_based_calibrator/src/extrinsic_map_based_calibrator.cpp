@@ -29,7 +29,7 @@ ExtrinsicMapBasedCalibrator::ExtrinsicMapBasedCalibrator(const rclcpp::NodeOptio
   // set launch param
   parent_frame_ = this->declare_parameter("parent_frame", "");
   child_frame_ = this->declare_parameter("child_frame", "");
-  is_debug_pub_ = this->declare_parameter<bool>("map_based_calibrator.debug_pub");
+  is_debug_pub_ = this->declare_parameter<bool>("map_based_calibrator.debug_pub", true);
   is_calibration_area_map_ = this->declare_parameter<bool>("use_calibration_area_map", "");
 
   {

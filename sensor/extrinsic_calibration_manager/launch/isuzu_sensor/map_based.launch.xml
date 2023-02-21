@@ -26,14 +26,6 @@
     </include>
   </group>
 
-<!--  <group>
-    <push-ros-namespace namespace="sensors"/>
-    <include file="$(find-pkg-share extrinsic_calibration_manager)/launch/$(var sensor_model)/map_based_sensors.launch.xml">
-      <arg name="vehicle_id" value="$(var vehicle_id)"/>
-      <arg name="use_calibration_area_map" value="$(var use_calibration_area_map)"/>
-    </include>
-  </group>-->
-
   <!-- Map -->
   <group if="$(var use_calibration_area_map)">
     <push-ros-namespace namespace="sensor_kit"/>

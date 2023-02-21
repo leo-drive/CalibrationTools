@@ -19,7 +19,6 @@
     <param name="dst_path" value="$(var dst_yaml)"/>
   </node>
 
-  <!-- extrinsic_calibration_manager -->
   <node pkg="extrinsic_calibration_manager" exec="extrinsic_calibration_manager" name="extrinsic_calibration_manager" output="screen">
     <param name="parent_frame" value="$(var parent_frame)"/>
     <param name="child_frames" value="
@@ -30,13 +29,13 @@
 
   <group>
     <include file="$(find-pkg-share point_cloud_accumulator)/launch/point_cloud_accumulator.launch.xml">
-      <arg name="ns" value="$(var parent_frame)/velodyne_left_base_link"/>
+      <arg name="ns" value="$(var parent_frame)/velodyne_left"/>
       <arg name="input_sensor_topic_name" value="/sensing/lidar/left/pointcloud_raw"/>
       <arg name="output_sensor_topic_name" value="/sensing/lidar/left/pointcloud_raw/accumulated_pointcloud"/>
       <arg name="accumulate_frame_num" value="$(var accumulate_frame_num)"/>
     </include>
     <include file="$(find-pkg-share extrinsic_map_based_calibrator)/launch/calibrator.launch.xml">
-      <arg name="ns" value="$(var parent_frame)/velodyne_left_base_link"/>
+      <arg name="ns" value="$(var parent_frame)/velodyne_left"/>
       <arg name="parent_frame" value="$(var parent_frame)"/>
       <arg name="child_frame" value="velodyne_left"/>
       <arg name="config_file_name" value="$(var config_file_name)"/>
