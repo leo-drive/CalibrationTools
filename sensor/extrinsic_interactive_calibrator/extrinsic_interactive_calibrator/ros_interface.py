@@ -270,6 +270,7 @@ class RosInterface(Node):
                 camera_parent_lidar_transform = tf_message_to_transform_matrix(
                     camera_parent_lidar_tf
                 )
+
             except TransformException as ex:
                 self.get_logger().error(
                     f"Could not transform {self.camera_parent_frame} to {self.lidar_frame}: {ex}"
@@ -281,9 +282,16 @@ class RosInterface(Node):
                 @ camera_optical_lidar_transform
                 @ np.linalg.inv(camera_parent_lidar_transform)
             )
+            test_transform = (
+                camera_optical_lidar_transform
+                @ np.linalg.inv(camera_parent_lidar_transform)
+            )
+            self.get_logger().info(
+                f"[[TEST_TRANSFORM]::  {np.linalg.inv(test_transform)}"
+            )
 
             self.output_transform_msg = transform_matrix_to_tf_message(
-                np.linalg.inv(camera_camera_parent_transform)
+                np.linalg.inv(test_transform)
             )
             self.output_transform_msg.header.frame_id = self.camera_parent_frame
             self.output_transform_msg.child_frame_id = self.camera_frame
