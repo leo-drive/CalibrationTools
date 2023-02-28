@@ -12,7 +12,7 @@
   <let name="pointcloud_topic" value="/sensing/lidar/top/pointcloud_raw"/>
 
   <let name="calibrate_sensor" value="false"/>
-  <let name="calibrate_sensor" value="true" if="$(eval &quot;'$(var camera_name)' == 'camera7' &quot;)"/>
+  <let name="calibrate_sensor" value="true" if="$(eval &quot;'$(var camera_name)' == 'camera4' &quot;)"/>
 
   <!-- extrinsic_calibration_client -->
   <arg name="src_yaml" default="$(find-pkg-share individual_params)/config/$(var vehicle_id)/$(var sensor_model)/sensor_kit_calibration.yaml"/>
