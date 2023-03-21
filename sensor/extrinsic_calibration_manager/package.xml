@@ -25,7 +25,6 @@
   <exec_depend>extrinsic_ground_plane_calibrator</exec_depend>
   <exec_depend>extrinsic_interactive_calibrator</exec_depend>
   <exec_depend>extrinsic_manual_calibrator</exec_depend>
-  <exec_depend>extrinsic_tag_based_calibrator</exec_depend>
   <exec_depend>image_proc</exec_depend>
   <exec_depend>individual_params</exec_depend>
   <exec_depend>tunable_static_tf_broadcaster</exec_depend>
