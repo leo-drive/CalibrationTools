@@ -17,7 +17,7 @@
   <arg name="calibration_rviz" default="true"/>
 
   <!-- interactive only -->
-  <arg name="interactive_use_concatenated" default="true"/>
+  <arg name="interactive_use_concatenated" default="false"/>
 
   <!-- logging simulator -->
   <include if="$(var logging_simulator)" file="$(find-pkg-share autoware_launch)/launch/logging_simulator.launch.xml">

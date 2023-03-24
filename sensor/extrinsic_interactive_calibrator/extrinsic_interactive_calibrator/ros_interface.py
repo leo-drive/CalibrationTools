@@ -270,6 +270,7 @@ class RosInterface(Node):
                 camera_parent_lidar_transform = tf_message_to_transform_matrix(
                     camera_parent_lidar_tf
                 )
+
             except TransformException as ex:
                 self.get_logger().error(
                     f"Could not transform {self.camera_parent_frame} to {self.lidar_frame}: {ex}"
@@ -277,13 +278,17 @@ class RosInterface(Node):
                 return
 
             camera_camera_parent_transform = (
-                np.linalg.inv(optical_axis_to_camera_transform)
-                @ camera_optical_lidar_transform
-                @ np.linalg.inv(camera_parent_lidar_transform)
+                    np.linalg.inv(optical_axis_to_camera_transform)
+                    @ camera_optical_lidar_transform
+                    @ np.linalg.inv(camera_parent_lidar_transform)
+            )
+            test_transform = (
+                    camera_optical_lidar_transform
+                    @ np.linalg.inv(camera_parent_lidar_transform)
             )
 
             self.output_transform_msg = transform_matrix_to_tf_message(
-                np.linalg.inv(camera_camera_parent_transform)
+                np.linalg.inv(test_transform)
             )
             self.output_transform_msg.header.frame_id = self.camera_parent_frame
             self.output_transform_msg.child_frame_id = self.camera_frame
@@ -343,9 +348,9 @@ class RosInterface(Node):
                 return
 
         if (
-            len(self.camera_info_queue) == 0
-            or len(self.image_queue) == 0
-            or len(self.pointcloud_queue) == 0
+                len(self.camera_info_queue) == 0
+                or len(self.image_queue) == 0
+                or len(self.pointcloud_queue) == 0
         ):
             return
 
@@ -439,15 +444,15 @@ class RosInterface(Node):
         with self.lock:
             service_status = self.optimize_camera_intrinsics_client.service_is_ready()
             if (
-                service_status != self.optimize_camera_intrinsics_available
-                and self.camera_info_sync is not None
+                    service_status != self.optimize_camera_intrinsics_available
+                    and self.camera_info_sync is not None
             ):
                 self.optimize_camera_intrinsics_status_callback(service_status)
                 self.optimize_camera_intrinsics_available = service_status
 
             if (
-                self.optimize_camera_intrinsics_future is not None
-                and self.optimize_camera_intrinsics_future.done()
+                    self.optimize_camera_intrinsics_future is not None
+                    and self.optimize_camera_intrinsics_future.done()
             ):
                 response = self.optimize_camera_intrinsics_future.result()
                 self.optimize_camera_intrinsics_result_callback(response.optimized_camera_info)
