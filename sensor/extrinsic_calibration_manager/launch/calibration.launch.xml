@@ -8,8 +8,8 @@
   <arg name="lanelet2_map_file" default="lanelet2_map.osm"/>
   <arg name="pointcloud_map_file" default="pointcloud_map.pcd"/>
   <arg name="logging_simulator" default="true"/>
-  <arg name="map_calibration_area_file" default="map_calibration_area.pcd"/>
-  <arg name="use_calibration_area_map" default="true"/>
+  <arg name="map_calibration_area_file" default="map.pcd"/>
+  <arg name="use_calibration_area_map" default="false"/>
 
   <!-- tag_based & interactive only -->
   <arg name="camera_name" default=""/>
