@@ -2,8 +2,8 @@
 <launch>
     <arg name="vehicle_id" default="robicarr"/>
 
-    <let name="sensor_model" value="robicarr_sensor_kit"/>
-    <let name="parent_frame" value="sensor_kit_base_link"/>
+    <arg name="sensor_model" default="robicarr_sensor_kit"/>
+    <arg name="parent_frame" default="sensor_kit_base_link"/>
 
     <!-- extrinsic_calibration_client -->
     <arg name="src_yaml" default="$(find-pkg-share individual_params)/config/$(var vehicle_id)/$(var sensor_model)/sensor_kit_calibration.yaml"/>
@@ -25,7 +25,7 @@
 
     <!-- extrinsic_manual_calibrator -->
     <include file="$(find-pkg-share extrinsic_manual_calibrator)/launch/calibrator.launch.xml">
-        <arg name="ns" value="$(var parent_frame)/rs_helios_top_base_link"/>
+        <arg name="ns" value="$(var parent_frame)/hesai_xt128_top_base_link"/>
         <arg name="parent_frame" value="$(var parent_frame)"/>
         <arg name="child_frame" value="hesai_xt128_top_base_link"/>
     </include>

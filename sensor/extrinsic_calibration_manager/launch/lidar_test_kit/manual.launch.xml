@@ -2,7 +2,7 @@
 <launch>
     <arg name="vehicle_id" default="robicarr"/>
 
-    <let name="sensor_model" value="robicarr_sensor_kit"/>
+    <arg name="sensor_model" default="robicarr_sensor_kit"/>
 
     <group>
         <push-ros-namespace namespace="sensor_kit"/>
